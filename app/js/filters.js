@@ -1,5 +1,8 @@
-/* http://docs.angularjs.org/#!angular.filter */
+/* http://docs-next.angularjs.org/api/angular.module.ng.$filterProvider */
 
-angular.filter('checkmark', function(input) {
-  return input ? '\u2713' : '\u2718';
+angular.module('PhoneCatApp.filters', []).
+  filter('checkmark', function () {
+    return function (input) {
+      return input ? '\u2713' : '\u2718';
+    }
 });

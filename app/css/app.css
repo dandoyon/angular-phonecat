@@ -4,6 +4,10 @@ a {
   color: blue;
 }
 
+a.back {
+	text-decoration: none;
+}
+
 .controls {
   position: absolute;
   width: 9em;

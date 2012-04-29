@@ -3,7 +3,7 @@ describe('PhoneCat App', function() {
 
   it('should redirect index.html to index.html#/phones', function() {
     browser().navigateTo('../../app/index.html');
-    expect(browser().location().hash()).toBe('/phones');
+    expect(browser().location().path()).toBe('/phones');
   });
 
 
@@ -28,13 +28,18 @@ describe('PhoneCat App', function() {
     it('should be possible to control phone order via the drop down select box', function() {
       input('query').enter('tablet'); //let's narrow the dataset to make the test assertions shorter
 
-      expect(repeater('.phones li', 'Phone List').column('a')).
+     /*expect(repeater('.phones li', 'Phone List').column('a')).
           toEqual(["Motorola XOOM\u2122 with Wi-Fi",
                    "MOTOROLA XOOM\u2122"]);
+     */              
+      expect(repeater('.phones li', 'Phone List').column('phone.name')).
+          toEqual(["Motorola XOOM\u2122 with Wi-Fi",
+               "MOTOROLA XOOM\u2122"]);
+          
+      select('orderProp').option('Alphabetical');
 
-      select('orderProp').option('alphabetical');
-
-      expect(repeater('.phones li', 'Phone List').column('a')).
+      expect(repeater('.phones li', 'Phone List').column('phone.name')).
+      
           toEqual(["MOTOROLA XOOM\u2122",
                    "Motorola XOOM\u2122 with Wi-Fi"]);
     });
@@ -43,7 +48,7 @@ describe('PhoneCat App', function() {
     it('should render phone specific links', function() {
       input('query').enter('nexus');
       element('.phones li a').click();
-      expect(browser().location().hash()).toBe('/phones/nexus-s');
+      expect(browser().location().path()).toBe('/phones/nexus-s');
     });
   });
 
